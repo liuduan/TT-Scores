@@ -5,98 +5,14 @@
     <meta charset="utf-8">
 
     <title>Scores</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body >
 <br><br>
-<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
-
-
-	
-<script>
-// read csv;
-$(document).ready(function() {
-	alert("start.");
-	$.ajax({
-	  url: "http://www.google.com",
-	  data: "",
-	  type: 'post',
-	  success: function(data) {
-	    alert(data);
-	  }
-	});
-	
-	alert("1.5");
-	
-	
-	
-	
-	
-	
-	 $("button").click(function(){
-        $.post("http://google.ocm",
-        {
-          name: "Donald Duck",
-          city: "Duckburg"
-        },
-        function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-    });
-	
-	
-	
-	
-	
-	$.post("http://google.com", 
-		function(data, status){
-			
-			alert("Data: " + data + "\nStatus: " + status);
-    });
-	
-	
-	
-	
-	
-	$("#div1").load("http://www.google.com");
-	alert("start2.");
-    $.ajax({
-        type: "GET",
-		url: "http://google.com",
-        // url: "Score-2017-09-03.csv",
-        dataType: "text",
-        success: function(data) {
-			alert("start-2.");
-			// processData(data);
-			}
-     });
-});
-
-function processData(allText) {
-    var record_num = 5;  // or however many elements there are in each row
-    var allTextLines = allText.split(/\r\n|\n/);
-    var entries = allTextLines[0].split(',');
-    var lines = [];
-
-    var headings = entries.splice(0,record_num);
-    while (entries.length>0) {
-        var tarr = [];
-        for (var j=0; j<record_num; j++) {
-            tarr.push(headings[j]+":"+entries.shift());
-        }
-        lines.push(tarr);
-    }
-    alert(lines);
-}
-
-</script>
-
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script type="text/javascript">
-
+	// get the file name.
     $(document).ready(function(){
 
         $('input[type="file"]').change(function(e){
@@ -142,22 +58,90 @@ function processData(allText) {
 
 <button id="button1">Get External Content</button>
 
+==========================================================================================
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+		
+        $("p").append(" <b>Appended text</b>.");
+		alert("button");
+		
+		   
+		alert("a");
+		$.post("test.txt", function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+			});
+        $.get({url: "text.txt", success: function(result){
+			alert("b");
+            $("#div1").html(result);
+        }});
+   
+		
+		
+		
+		
+		
+		
+		xmlhttp = new XMLHttpRequest();
+		xhttp.open("GET", "test.txt", true);
+		xhttp.send();
+        $.ajax({url: "http://www.google.com", success: function(result){
+        //    $("#div2").html(result);
+			alert("button 2");
+        }});
+		alert("button 3");
+    });
+
+});
+</script>
 
 
 
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
 
 
 
+<button id="btn1">Append text, button 1</button>
+
+==========================================================*<br>
+
+<script>
+
+ 
+
+</script>
+
+<div id="div1"><h2>div1</h2></div>
+
+<button id = "button-22">Get External Content, button-22</button>
+
+==================================================================<br>
+<script>
+function readTextFile(file)
+{
+	alert("abc");
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState == 4)
+        {
+            if(rawFile.status == 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+</script>
 
 
 
-
-
-
-
-
-
-
+<button id = "button-33" onclick="readTextFile('file:///C:/1-5-Files/TT-Scores/test.txt')">Get External Content, button-22</button>
 
 
 
