@@ -13,88 +13,75 @@
 
 <script type="text/javascript">
 	// get the file name.
-    $(document).ready(function(){
-
-        $('input[type="file"]').change(function(e){
-
-            var fileName = e.target.files[0].name;
-
-            alert('The file "' + fileName +  '" has been selected.');
-			var filePath = e.target.files[0].mozFullPath;
-			alert(filePath);
-			// console.log(this.files[0].mozFullPath);
-			var tmppath = URL.createObjectURL(e.target.files[0]);
-			alert(tmppath);
-			
-			alert("Path: " + $('input[type=file]').val());
-
-        });
-
-    });
-
+ 
 </script>
 
 </head>
 
 <body>
-
+<div id = "title" style="text-align: center;">
+<h1>Table Tennis Score Calculator</h1>
+<h1>乒乓球计分网页</h1>
+</div>
     <form>
-
-        <input type="file">file</input>
+		请选择过去的积分文件：<br>
+        Please slect a file containing previous scores <input type="file"><br>
 
     </form>
 
 
+<div>
+<button type="button" onclick="showData()">Show data</button>
+</div>
+
+<script>
+var fileName = "";
+$('input[type="file"]').change(function(e){
+    fileName = e.target.files[0].name;
+    alert('The file -- "'  + fileName +  '" has been selected.');
+    });
 
 
 
-
-
-
-
-
-==========================================================================================
-
-
-
-
-<p>This is a paragraph.</p>
-<p>This is another paragraph.</p>
-
-
-
-<button id="btn1">Append text, button 1</button><br>
-
-<div id="div1"><h2>div1</h2></div>
-
-<button id = "button-22" onclick="read_CSV()">Read CSV</button>
-<br>
-==================================================================<br>
-
-====================================================================<br>
-<script type="text/javascript">
-function read_CSV()	{
+var allText = "10";
+function loadDoc() {
+	// alert("2");
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			// document.getElementById("demo").innerHTML = this.responseText;
+			allText = xhttp.responseText;
+			//alert("4: " + allText);
+			}
+		};
+	xhttp.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
+	// alert("3");
+	xhttp.send();
 	
-    var allText =[];
-    var allTextLines = [];
-    var Lines = [];
-	
-    var txtFile = new XMLHttpRequest();
-	alert("3");
-	
-    txtFile.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
-	
-    //txtFile.onreadystatechange = function(){
-        allText = txtFile.responseText;
-        allTextLines = allText.split(/\r\n|\n/);
-		//};
+}
 
-    document.write(allTextLines);<br>
-    document.write(allText);<br>
-    document.write(txtFile);<br>
-	
-	}
+function showData() {
+	loadDoc();
+	alert("5, allText: " + allText);
+	allTextLines = allText.split(/\r\n|\n/);
+	alert("6, allText, 1: " + allTextLines[0][0]);
+	// document.write(allTextLines);
+    // document.write(allText);
+    // document.write(txtFile);
+}
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
