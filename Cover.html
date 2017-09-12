@@ -20,6 +20,13 @@
             var fileName = e.target.files[0].name;
 
             alert('The file "' + fileName +  '" has been selected.');
+			var filePath = e.target.files[0].mozFullPath;
+			alert(filePath);
+			// console.log(this.files[0].mozFullPath);
+			var tmppath = URL.createObjectURL(e.target.files[0]);
+			alert(tmppath);
+			
+			alert("Path: " + $('input[type=file]').val());
 
         });
 
@@ -33,7 +40,7 @@
 
     <form>
 
-        <input type="file">
+        <input type="file">file</input>
 
     </form>
 
@@ -44,56 +51,10 @@
 
 
 
-<script>
 
-    $("#button1").click(function(){
-		aler("button");
-        $.ajax({url: "google.com", success: function(result){
-            $("#div2").html(result);
-        }});
-    });
-
-</script>
-<div id="div2"><h2>Let jQuery AJAX Change This Text, div 2</h2></div>
-
-<button id="button1">Get External Content</button>
 
 ==========================================================================================
-<script>
-$(document).ready(function(){
-    $("#btn1").click(function(){
-		
-        $("p").append(" <b>Appended text</b>.");
-		alert("button");
-		
-		   
-		alert("a");
-		$.post("test.txt", function(data, status){
-			alert("Data: " + data + "\nStatus: " + status);
-			});
-        $.get({url: "text.txt", success: function(result){
-			alert("b");
-            $("#div1").html(result);
-        }});
-   
-		
-		
-		
-		
-		
-		
-		xmlhttp = new XMLHttpRequest();
-		xhttp.open("GET", "test.txt", true);
-		xhttp.send();
-        $.ajax({url: "http://www.google.com", success: function(result){
-        //    $("#div2").html(result);
-			alert("button 2");
-        }});
-		alert("button 3");
-    });
 
-});
-</script>
 
 
 
@@ -102,48 +63,38 @@ $(document).ready(function(){
 
 
 
-<button id="btn1">Append text, button 1</button>
-
-==========================================================*<br>
-
-<script>
-
- 
-
-</script>
+<button id="btn1">Append text, button 1</button><br>
 
 <div id="div1"><h2>div1</h2></div>
 
-<button id = "button-22">Get External Content, button-22</button>
-
+<button id = "button-22" onclick="read_CSV()">Read CSV</button>
+<br>
 ==================================================================<br>
-<script>
-function readTextFile(file)
-{
-	alert("abc");
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState == 4)
-        {
-            if(rawFile.status == 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    }
-    rawFile.send(null);
-}
 
+====================================================================<br>
+<script type="text/javascript">
+function read_CSV()	{
+	
+    var allText =[];
+    var allTextLines = [];
+    var Lines = [];
+	
+    var txtFile = new XMLHttpRequest();
+	alert("3");
+	
+    txtFile.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
+	
+    //txtFile.onreadystatechange = function(){
+        allText = txtFile.responseText;
+        allTextLines = allText.split(/\r\n|\n/);
+		//};
+
+    document.write(allTextLines);<br>
+    document.write(allText);<br>
+    document.write(txtFile);<br>
+	
+	}
 </script>
-
-
-
-<button id = "button-33" onclick="readTextFile('file:///C:/1-5-Files/TT-Scores/test.txt')">Get External Content, button-22</button>
-
-
 
 
 </body>
