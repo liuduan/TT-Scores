@@ -4,24 +4,26 @@
 
 <div id="demo">
 <h1>The XMLHttpRequest Object</h1>
-<button type="button" onclick="loadDoc()">Change Content</button>
+<button type="button" onclick="loadDoc()">Load Document</button>
 <button type="button" onclick="showData()">Show data</button>
 </div>
 
 <script>
 var allText = "10";
 function loadDoc() {
-	// alert("2");
+	alert("2");
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
+		allText = xhttp.responseText;
+		alert("4: " + allText);
 		if (this.readyState == 4 && this.status == 200) {
 			// document.getElementById("demo").innerHTML = this.responseText;
 			allText = xhttp.responseText;
-			//alert("4: " + allText);
+			alert("4: " + allText);
 			}
 		};
 	xhttp.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
-	// alert("3");
+	alert("3");
 	xhttp.send();
 	
 }

@@ -36,41 +36,45 @@
 
 <script>
 var fileName = "";
+var allText = "100";
 $('input[type="file"]').change(function(e){
     fileName = e.target.files[0].name;
     alert('The file -- "'  + fileName +  '" has been selected.');
     });
 
-
-
-var allText = "10";
 function loadDoc() {
-	// alert("2");
+	alert("2");
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			// document.getElementById("demo").innerHTML = this.responseText;
 			allText = xhttp.responseText;
-			//alert("4: " + allText);
+			alert("4: ");
 			}
 		};
 	xhttp.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
-	// alert("3");
+	alert("3");
 	xhttp.send();
 	
 }
-
 function showData() {
+	alert("showData");
+	// $.post("file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", 
+	$.post("http://google.com", 
+		{suggest: "text"}, 
+		function(result){
+			alert(result);
+			//$("span").html(result);
+			}
+		);
 	loadDoc();
 	alert("5, allText: " + allText);
 	allTextLines = allText.split(/\r\n|\n/);
-	alert("6, allText, 1: " + allTextLines[0][0]);
+	alert("6, allText, 1: " + allTextLines);
 	// document.write(allTextLines);
     // document.write(allText);
     // document.write(txtFile);
 }
-
-
 </script>
 
 
