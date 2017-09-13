@@ -20,57 +20,63 @@
 
 <body>
 <div id = "title" style="text-align: center;">
-<h1>Table Tennis Score Calculator</h1>
 <h1>乒乓球计分网页</h1>
+<h4>（要用火狐浏览器）</h4>
 </div>
+<br>
+
+<div id = "file_selector" style = "margin-left: 100px;">
     <form>
 		请选择过去的积分文件：<br>
         Please slect a file containing previous scores <input type="file"><br>
 
     </form>
+</div>
 
-
-<div>
+<div id="show_data" style = "margin-left: 100px; display: none;">
 <button type="button" onclick="showData()">Show data</button>
 </div>
 
 <script>
 var fileName = "";
 var allText = "100";
+var file_location = "";
+// select a file.
 $('input[type="file"]').change(function(e){
     fileName = e.target.files[0].name;
-    alert('The file -- "'  + fileName +  '" has been selected.');
+	file_location = "file://C:/1-5-Files/TT-Scores/Scores/" + fileName;
+    alert('file location: '  + file_location);
+	$("#file_selector").hide();
+	$("#show_data").show();
     });
 
 function loadDoc() {
-	alert("2");
+	// alert("2");
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			// document.getElementById("demo").innerHTML = this.responseText;
 			allText = xhttp.responseText;
-			alert("4: ");
+			// alert("4: " + allText);
 			}
 		};
-	xhttp.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
-	alert("3");
+	xhttp.open("GET", file_location, true);
+	// alert("3");
 	xhttp.send();
 	
 }
 function showData() {
-	alert("showData");
+	// alert("showData");
 	// $.post("file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", 
-	$.post("http://google.com", 
-		{suggest: "text"}, 
-		function(result){
-			alert(result);
-			//$("span").html(result);
-			}
-		);
 	loadDoc();
-	alert("5, allText: " + allText);
-	allTextLines = allText.split(/\r\n|\n/);
-	alert("6, allText, 1: " + allTextLines);
+	// alert("5, allText: " + allText);
+	var array2D = allText.split(/\r\n|\n/).map(function(x){return x.split(",")});
+	alert("7, array2D, 1,2: " + array2D[1][2]);
+	
+	
+	
+	// allTextLines = allText.split(/\r\n|\n/);
+	// alert("6, allText, 0,0: " + allTextLines[1]);
 	// document.write(allTextLines);
     // document.write(allText);
     // document.write(txtFile);

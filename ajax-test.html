@@ -1,44 +1,25 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.post("http://toxvalue.org/6-CTV/Search-php.php",
+        {
+          name: "Donald Duck",
+          city: "Duckburg"
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</head>
 <body>
 
-<div id="demo">
-<h1>The XMLHttpRequest Object</h1>
-<button type="button" onclick="loadDoc()">Load Document</button>
-<button type="button" onclick="showData()">Show data</button>
-</div>
-
-<script>
-var allText = "10";
-function loadDoc() {
-	alert("2");
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		allText = xhttp.responseText;
-		alert("4: " + allText);
-		if (this.readyState == 4 && this.status == 200) {
-			// document.getElementById("demo").innerHTML = this.responseText;
-			allText = xhttp.responseText;
-			alert("4: " + allText);
-			}
-		};
-	xhttp.open("GET", "file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", true);
-	alert("3");
-	xhttp.send();
-	
-}
-
-function showData() {
-	alert("5, allText: " + allText);
-	allTextLines = allText.split(/\r\n|\n/);
-	alert("6, allText, 1: " + allTextLines[0][0]);
-	// document.write(allTextLines);
-    // document.write(allText);
-    // document.write(txtFile);
-}
-
-
-</script>
+<button>Send an HTTP POST request to a page and get the result back</button>
 
 </body>
 </html>
