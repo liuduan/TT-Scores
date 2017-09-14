@@ -7,7 +7,7 @@
     <title>Scores</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="Cover_js.js"></script>
+
 </head>
 <body >
 <br><br>
@@ -145,7 +145,7 @@ function createTable(tableData) {
 function Player_A() {
 	// alert(1);
 	var Winner_Selection = '<div style ="margin-left: 50px;">';
-	Winner_Selection += '<select name="player_A">';
+	Winner_Selection += '<select name="player_A" onchange="Select_player_A(this)>';
 	// alert(1.5);
 	
 	
@@ -164,7 +164,7 @@ function Player_A() {
 function Player_B() {
 	alert(1);
 	var Player_B_Selection = '<div style ="margin-left: 50px;">';
-	Player_B_Selection += '<select name="player_A">';
+	Player_B_Selection += '<select name="player_B" onchange="Select_player_B(this)">';
 	// alert(1.5);
 	
 	
@@ -178,6 +178,16 @@ function Player_B() {
 	Player_B_Selection += '</select>  <br><br>';
 	Player_B_Selection += '</div>';
 	$("#Player_B").replaceWith(Player_B_Selection);
+}
+
+function Select_player_A(a) {
+	var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
+	alert(x);
+}
+
+function Select_player_B((a) {
+	var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
+	alert(x);
 }
 
 function Score_calculation() {
