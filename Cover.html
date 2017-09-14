@@ -7,6 +7,7 @@
     <title>Scores</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="Cover_js.js"></script>
 </head>
 <body >
 <br><br>
@@ -27,7 +28,7 @@
 
 <div id = "file_selector" style = "margin-left: 100px;">
     <form>
-		请选择过去的积分文件 <input type="file"><br>
+		请选择过去的积分文件 <input type="file" id = "file_selection"><br>
 
     </form>
 </div>
@@ -40,11 +41,20 @@
 
 <br><br>
 <div id = "score_calculation" style = "margin-left: 100px;">
-	<button type="button" onclick="score_calculation()">Calculate Scores</button>
-	<br>赢家：
-	<div id="Winner" style ="margin-left: 50px;">Player selection</div>
-	<br>输家：
-	<div id="Loser" style ="margin-left: 50px;">Player selection</div>
+	<button type="button" onclick="Player_A()">Player A Selection</button>
+	<br>胜方：
+	<div id="Player_A" style ="margin-left: 50px;">Player A</div>
+	
+	<br><br>
+	<button type="button" onclick="Player_B()">Player B Selection</button>
+	<br>负方：
+	<div id="Player_B" style ="margin-left: 50px;">Player B</div>
+	
+	<br><br>
+	<button type="button" onclick="Score_calculation()">Score_calculation</button>
+	<br>新积分：
+	<div id="New_Scores" style ="margin-left: 50px;">New_Scores</div>
+	
 </div>
 
 
@@ -56,8 +66,11 @@ var fileName = "";
 var allText = "";
 var file_location = "";
 var array2D = [];
+var column_N = 0;
+var row_N = 0;
+
 // select a file.
-$('input[type="file"]').change(function(e){
+$('input[id="file_selection"]').change(function(e){
     fileName = e.target.files[0].name;
 	file_location = "file://C:/1-5-Files/TT-Scores/Scores/" + fileName;
     alert('file location: '  + file_location);
@@ -86,6 +99,8 @@ function showData() {
 	loadDoc();
 	// alert("5, allText: " + allText);
 	array2D = allText.split(/\r\n|\n/).map(function(x){return x.split(",")});
+	column_N = array2D[0].length;
+	row_N = row_number(array2D);
 	// alert("7, array2D, 1,2: " + array2D[1][1]);
 	
 	// alert("8. column number: " + array2D[0].length);
@@ -127,24 +142,63 @@ function createTable(tableData) {
 }
 
 
-function score_calculation() {
+function Player_A() {
 	// alert(1);
-	var selection_string = '<div style ="margin-left: 50px;">';
-	selection_string += '<form action="/action_page.php"><select name="player_A">';
+	var Winner_Selection = '<div style ="margin-left: 50px;">';
+	Winner_Selection += '<select name="player_A">';
 	// alert(1.5);
-	var column_N = array2D[0].length;
-	var row_N = row_number(array2D);
 	
-	alert(array2D[1][1]);
+	
+	// alert(array2D[1][1]);
 	
 	for (i = 1; i < row_N; i++) {
-		selection_string += '<option value=' + array2D[i][3] + ">" + array2D[i][1] + '</option>';
+		Winner_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
 		} 
 	// alert(2);
 	
-	selection_string += '</select>  <br><br>  <input type="submit"></form>';
-	selection_string += '</div>';
-	$("#Winner").replaceWith(selection_string);
+	Winner_Selection += '</select>  <br><br>';
+	Winner_Selection += '</div>';
+	$("#Player_A").replaceWith(Winner_Selection);
+}
+
+function Player_B() {
+	alert(1);
+	var Player_B_Selection = '<div style ="margin-left: 50px;">';
+	Player_B_Selection += '<select name="player_A">';
+	// alert(1.5);
+	
+	
+	// alert(array2D[1][1]);
+	
+	for (i = 1; i < row_N; i++) {
+		Player_B_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
+		} 
+	// alert(2);
+	
+	Player_B_Selection += '</select>  <br><br>';
+	Player_B_Selection += '</div>';
+	$("#Player_B").replaceWith(Player_B_Selection);
+}
+
+function Score_calculation() {
+	alert(1);
+	/*
+	var Player_B_Selection = '<div style ="margin-left: 50px;">';
+	Player_B_Selection += '<select name="player_A">';
+	// alert(1.5);
+	
+	
+	// alert(array2D[1][1]);
+	
+	for (i = 1; i < row_N; i++) {
+		Player_B_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
+		} 
+	// alert(2);
+	
+	Player_B_Selection += '</select>  <br><br>';
+	Player_B_Selection += '</div>';
+	$("#Player_B").replaceWith(Player_B_Selection);
+	*/
 }
 
 
