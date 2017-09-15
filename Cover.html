@@ -7,7 +7,7 @@
     <title>Scores</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="Cover_js.js"></script>
+
 </head>
 <body >
 <br><br>
@@ -34,13 +34,17 @@
 </div>
 
 <div id="show_data" style = "margin-left: 100px; display: none;">
-	<button type="button" onclick="showData()">Show data</button>
+	<button type="button" onclick="showData()">显示上次比赛积分</button>
 </div>
 <div id="display_div">
 </div>
-
-<br><br>
 <div id = "score_calculation" style = "margin-left: 100px;">
+	<div id="MyTargetDiv"></div>
+	<br><br>
+
+
+	请输入比赛日期： <input type="text" name="game_date" id = "game_date"> YYYY-MMM-DD<br><br>
+
 	<button type="button" onclick="Player_A()">Player A Selection</button>
 	<br>胜方：
 	<div id="Player_A" style ="margin-left: 50px;">Player A</div>
@@ -52,6 +56,9 @@
 	
 	<br><br>
 	<button type="button" onclick="Score_calculation()">Score_calculation</button>
+	
+	<br><br>
+	<button type="button" onclick="Show_new_scores()">Show New Score</button>
 	<br>新积分：
 	<div id="New_Scores" style ="margin-left: 50px;">New_Scores</div>
 	
@@ -133,9 +140,10 @@ function createTable(tableData) {
 	table.setAttribute("margin-left", "50px");
 	
 	table.appendChild(tableBody);
-	document.body.appendChild(table);
-	// return table;
+	// document.body.appendChild(table);
+	document.getElementById("MyTargetDiv").appendChild(table);
 }
+
 function Player_A() {
 	// alert(1);
 	var Winner_Selection = '<div style ="margin-left: 50px;">';
@@ -191,7 +199,7 @@ function Score_calculation() {
 	var Difference = array2D[Player_A_N][3] - array2D[Player_B_N][3];
 	alert("Difference: " + Difference);
 	if (Math.abs(Difference) <= 12){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 8;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 8;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 8;
 		}
 	else if(Difference >= 13 && Difference <= 37){
@@ -199,73 +207,74 @@ function Score_calculation() {
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 7;
 		}
 	else if(Difference >= 38 && Difference <= 62){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 6;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 6;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 6;
 		}
 	else if(Difference >= 63 && Difference <= 87){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 5;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 5;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 5;
 		}
 	else if(Difference >= 88 && Difference <= 112){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 4;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 4;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 4;
 		}
 	else if(Difference >= 113 && Difference <= 137){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 3;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 3;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 3;
 		}
 	else if(Difference >= 138 && Difference <= 187){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 2;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 2;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 2;
 		}
 	else if(Difference >= 188 && Difference <= 237){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 1;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 1;
 		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 1;
 		}
 
 	
 	else if(Difference <= -13 && Difference >= -37){
-		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) -10;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 10;
+		array2D[Player_A_N][3] = array2D[Player_A_N][3] -10;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 10;
 		}
 	else if(Difference <= -38 && Difference >= -62){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 13;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 13;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 13;
 		}
 	else if(Difference <= -63 && Difference >= -87){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 16;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 16;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 16;
 		}
 	else if(Difference <= -88 && Difference >= -112){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 20;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 20;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 20;
 		}
 	else if(Difference <= -113 && Difference >= -137){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 25;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 25;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 25;
 		}
 	else if(Difference <= -138 && Difference >= -162){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 30;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 30;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 30;
 		}
 	else if(Difference <= -163 && Difference >= -187){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 35;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 35;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 35;
 		}
 	else if(Difference <= -188 && Difference >= -212){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 40;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 40;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 40;
 		}
 	else if(Difference <= -213 && Difference >= -237){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 45;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 45;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 45;
 		}
 	else if(Difference <= -238){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 50;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 50;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 50;
 		}
 	
-	
+	array2D[Player_A_N][2] = $("#game_date").val();
+	array2D[Player_B_N][2] = $("#game_date").val();
 	
 	
 	
@@ -293,6 +302,14 @@ function Score_calculation() {
 	$("#Player_B").replaceWith(Player_B_Selection);
 	*/
 }
+
+
+function Show_new_scores(){
+	createTable(array2D);
+
+}
+
+
 </script>
 
 
