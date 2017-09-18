@@ -9,19 +9,36 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
-<body >
+<body style="background: linear-gradient(to bottom right, LightSeaGreen, SkyBlue); ">
+<!-- 
+background: linear-gradient(to bottom right, aqua , lightgreen);
+background: linear-gradient(red, yellow); 
+background: linear-gradient(to bottom right, red, yellow);
+background: linear-gradient(to right, red , yellow); 
+background: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+background: repeating-linear-gradient(red, yellow 10%, green 20%);
+background: radial-gradient(red 5%, yellow 15%, green 60%); 
+background: radial-gradient(circle, red, yellow, green); 
+background: radial-gradient(closest-side at 60% 55%, red, yellow, black);
+background: radial-gradient(farthest-side at 60% 55%, red, yellow, black);
+background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+-->
 <br><br>
 
 <script type="text/javascript">
 	// get the file name.
  
 </script>
-
+<style>
+body{
+    font-family:'SimSun';
+}
+</style>
 </head>
 
 <body>
 <div id = "title" style="text-align: center;">
-<h1>乒乓球计分网页</h1>
+<h1 style = "font-family:'microsoft yahei';">乒乓球计分页面</h1>
 <h4>（要用火狐浏览器）</h4>
 </div>
 <br>
@@ -31,37 +48,43 @@
 		请选择过去的积分文件 <input type="file" id = "file_selection"><br>
 
     </form>
+
 </div>
 
 <div id="show_data" style = "margin-left: 100px; display: none;">
 	<button type="button" onclick="showData()">显示上次比赛积分</button>
+	<div id="display_div">
+	</div>
 </div>
-<div id="display_div">
-</div>
+
 <div id = "score_calculation" style = "margin-left: 100px;">
-	<div id="MyTargetDiv"></div>
 	<br><br>
 
 
 	请输入比赛日期： <input type="text" name="game_date" id = "game_date"> YYYY-MMM-DD<br><br>
 
-	<button type="button" onclick="Player_A()">Player A Selection</button>
-	<br>胜方：
-	<div id="Player_A" style ="margin-left: 50px;">Player A</div>
+	<button type="button" onclick="Players()">输入比赛选手</button>
 	
+	<div id = "Players" style = "display: none;"> 
+		<br>胜方：
+		<div id="Player_A" style ="margin-left: 50px;"></div>
+	
+		<br>
+		<br>负方：
+		<div id="Player_B" style ="margin-left: 50px;"></div>
+	</div>
 	<br><br>
-	<button type="button" onclick="Player_B()">Player B Selection</button>
-	<br>负方：
-	<div id="Player_B" style ="margin-left: 50px;">Player B</div>
 	
-	<br><br>
-	<button type="button" onclick="Score_calculation()">Score_calculation</button>
+	<button type="button" onclick="Score_calculation()">算积分</button>
 	
-	<br><br>
-	<button type="button" onclick="Show_new_scores()">Show New Score</button>
-	<br>新积分：
-	<div id="New_Scores" style ="margin-left: 50px;">New_Scores</div>
+	<div id = "results" style = "display: none;">
+		<br><br>
+		<button type="button" onclick="clear_scores()">清除积分</button>
+		<button type="button" onclick="Show_new_scores()">显示新积分</button>
 	
+		<br>新积分：
+		<div id="New_Scores" style ="margin-left: 50px;"></div>
+	</div>
 </div>
 
 
@@ -99,9 +122,9 @@ function loadDoc() {
 		};
 	xhttp.open("GET", file_location, true);
 	// alert("3");
-	xhttp.send();
-	
+	xhttp.send();	
 }
+
 function showData() {
 	// alert("showData");
 	// $.post("file://C:/1-5-Files/TT-Scores/Scores/Score-2017-09-03.csv", 
@@ -114,8 +137,9 @@ function showData() {
 	
 	// alert("8. column number: " + array2D[0].length);
 	// alert("9. row number: " + row_number(array2D));
-	createTable(array2D);
+	createTable(array2D, "display_div");
 }
+
 function row_number(ar){
     var row_count = ar.length;
     var row_sizes = []
@@ -124,7 +148,8 @@ function row_number(ar){
     }
     return row_count;
 }
-function createTable(tableData) {
+
+function createTable(tableData, target_div) {
   var table = document.createElement('table');
   var tableBody = document.createElement('tbody');
   tableData.forEach(function(rowData) {
@@ -141,42 +166,38 @@ function createTable(tableData) {
 	
 	table.appendChild(tableBody);
 	// document.body.appendChild(table);
-	document.getElementById("MyTargetDiv").appendChild(table);
+	document.getElementById(target_div).appendChild(table);
 }
+
+function Players(){
+	Player_A();
+	Player_B();
+	$("#Players").show();
+	}
 
 function Player_A() {
 	// alert(1);
 	var Winner_Selection = '<div style ="margin-left: 50px;">';
 	Winner_Selection += '<select name="player_A" onchange="Player_A_Selection(this)">';
 	// alert(1.5);
-	
-	
 	// alert(array2D[1][1]);
 	
-	for (i = 1; i < row_N; i++) {
-		Winner_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
+	for (i = 0; i < row_N; i++) {
+		Winner_Selection += '<option value=' + i + ">" + array2D[i][3] + ", "+ array2D[i][1] + '</option>';
 		} 
 	// alert(2);
-	
 	Winner_Selection += '</select>  <br><br>';
 	Winner_Selection += '</div>';
 	$("#Player_A").replaceWith(Winner_Selection);
 }
 
 function Player_B() {
-	// alert(1);
 	var Player_B_Selection = '<div style ="margin-left: 50px;">';
 	Player_B_Selection += '<select name="player_B" onchange="Player_B_Selection(this)">';
-	// alert(1.5);
-	
-	
-	// alert(array2D[1][1]);
-	
-	for (i = 1; i < row_N; i++) {
-		Player_B_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
+
+	for (i = 0; i < row_N; i++) {
+		Player_B_Selection += '<option value=' + i + ">" + array2D[i][3] + ", "+ array2D[i][1] + '</option>';
 		} 
-	// alert(2);
-	
 	Player_B_Selection += '</select>  <br><br>';
 	Player_B_Selection += '</div>';
 	$("#Player_B").replaceWith(Player_B_Selection);
@@ -184,12 +205,12 @@ function Player_B() {
 
 function Player_A_Selection(a) {
 	Player_A_N = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
-	alert(Player_A_N);
+	// alert(Player_A_N);
 }
 
 function Player_B_Selection(a) {
 	Player_B_N = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
-	alert(Player_B_N);
+	// alert(Player_B_N);
 }
 
 function Score_calculation() {
@@ -276,36 +297,19 @@ function Score_calculation() {
 	array2D[Player_A_N][2] = $("#game_date").val();
 	array2D[Player_B_N][2] = $("#game_date").val();
 	
-	
-	
-	
-	
-	
-	
 	alert(array2D[Player_A_N][1] + ", " + array2D[Player_A_N][3]);
 	alert(array2D[Player_B_N][1] + ", " + array2D[Player_B_N][3]);
-	/*
-	var Player_B_Selection = '<div style ="margin-left: 50px;">';
-	Player_B_Selection += '<select name="player_A">';
-	// alert(1.5);
 	
-	
-	// alert(array2D[1][1]);
-	
-	for (i = 1; i < row_N; i++) {
-		Player_B_Selection += '<option value=' + i + ">" + array2D[i][1] + '</option>';
-		} 
-	// alert(2);
-	
-	Player_B_Selection += '</select>  <br><br>';
-	Player_B_Selection += '</div>';
-	$("#Player_B").replaceWith(Player_B_Selection);
-	*/
+	$("#results").show();
 }
 
-
+function clear_scores(){
+	//$("#New_Scores").replaceWith("123");
+	document.getElementById("New_Scores").innerHTML = "";
+}
 function Show_new_scores(){
-	createTable(array2D);
+	document.getElementById("New_Scores").innerHTML = "";
+	createTable(array2D, "New_Scores");
 
 }
 
