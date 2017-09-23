@@ -254,27 +254,25 @@ function Score_calculation() {
 		}
 
 	else if(Difference <= -1 && Difference >= -12){
-		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) - 8;
-		array2D[Player_B_N][3] = array2D[Player_B_N][3] + 8;
+		array2D[Player_A_N][3] = parseInt(array2D[Player_A_N][3]) + 8;
+		array2D[Player_B_N][3] = array2D[Player_B_N][3] - 8;
 		}
 	else if(Difference <= -13 && Difference >= -37){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] -10;
-		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 10;
+		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 10;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) - 10;
 		}
 	else if(Difference <= -38 && Difference >= -62){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 13;
-		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 13;
+		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 13;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) - 13;
 		}
 	else if(Difference <= -63 && Difference >= -87){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 16;
-		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 16;
+		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 16;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) - 16;
 		}
 	else if(Difference <= -88 && Difference >= -112){
-		array2D[Player_A_N][3] = array2D[Player_A_N][3] - 20;
-		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) + 20;
+		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 20;
+		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) - 20;
 		}
-		
-		
 	else if(Difference <= -113 && Difference >= -137){
 		array2D[Player_A_N][3] = array2D[Player_A_N][3] + 25;
 		array2D[Player_B_N][3] = parseInt(array2D[Player_B_N][3]) - 25;
