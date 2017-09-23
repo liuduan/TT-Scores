@@ -77,7 +77,7 @@ function createTable(tableData) {
 function score_calculation() {
 	// alert(1);
 	var selection_string = '<div style ="margin-left: 50px;">';
-	selection_string += '<form action="/action_page.php"><select name="player_A">';
+	selection_string += '<form><select name="player_A">';
 	// alert(1.5);
 	var column_N = array2D[0].length;
 	var row_N = row_number(array2D);
